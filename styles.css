@@ -118,9 +118,40 @@
   opacity: 1;
 }
 
-/* Pulse light effect */
+/* Pulse light effect - Red Theme */
 .light-pulse {
   position: relative;
+  background: rgba(50, 0, 0, 0.1);
+  border: 1px solid rgba(200, 0, 0, 0.15);
+  box-shadow: 
+    0 2px 10px rgba(200, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.light-pulse:hover {
+  background: rgba(60, 0, 0, 0.15);
+  border-color: rgba(255, 0, 0, 0.2);
+  box-shadow: 
+    0 4px 15px rgba(200, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.light-pulse::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 0, 0, 0.7),
+    rgba(255, 50, 50, 0.9),
+    rgba(255, 0, 0, 0.7),
+    transparent);
+  animation: lightPulse 4s ease-in-out infinite;
+  z-index: 1;
 }
 
 .light-pulse::after {
@@ -132,15 +163,18 @@
   height: 2px;
   background: linear-gradient(90deg, 
     transparent, 
-    rgba(255, 215, 0, 0.9), 
+    rgba(255, 50, 50, 0.8),
+    rgba(255, 0, 0, 0.9),
+    rgba(255, 50, 50, 0.8),
     transparent);
-  animation: lightPulse 3s ease-in-out infinite;
+  animation: lightPulse 4s ease-in-out infinite 0.5s;
+  z-index: 1;
 }
 
 @keyframes lightPulse {
   0%, 100% {
-    opacity: 0;
-    transform: scaleX(0);
+    opacity: 0.6;
+    transform: scaleX(0.6);
   }
   50% {
     opacity: 1;
@@ -217,25 +251,6 @@
 
 /* ===== Professional Features CSS ===== */
 
-/* Scroll Progress Indicator */
-.scroll-progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background: rgba(0, 0, 0, 0.2);
-  z-index: 9999;
-}
-
-.scroll-progress__bar {
-  height: 100%;
-  background: linear-gradient(90deg, var(--secondary-color), #FFED4E);
-  width: 0%;
-  transition: width 0.1s ease;
-  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-}
-
 /* Professional Loading Animation */
 .page-loader {
   position: fixed;
@@ -258,21 +273,51 @@
 
 .loader-content {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .loader-dots {
   display: flex;
-  gap: 8px;
-  margin-bottom: 20px;
+  gap: 12px;
+  margin-bottom: 24px;
+  align-items: center;
+  justify-content: center;
 }
 
 .loader-dot {
-  width: 8px;
-  height: 8px;
+  width: 12px;
+  height: 12px;
   background: var(--secondary-color);
   border-radius: 50%;
-  animation: dotBounce 1.4s ease-in-out infinite both;
+  animation: dotPulse 1.4s ease-in-out infinite both;
 }
+
+.loader-dot:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.loader-dot:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+.loader-dot:nth-child(3) {
+  animation-delay: 0s;
+}
+
+@keyframes dotPulse {
+  0%, 80%, 100% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 
 .loader-dot:nth-child(1) {
   animation-delay: -0.32s;
@@ -334,7 +379,6 @@
 @media print {
   .nav,
   .back-to-top,
-  .scroll-progress,
   .page-loader {
     display: none !important;
   }
@@ -1066,12 +1110,15 @@ a:hover {
 }
 
 .section__title {
-  font-size: 2.5rem;
-  font-weight: 800;
+  font-size: 2.2rem;
+  font-weight: 700;
   color: var(--primary-color);
-  margin-bottom: var(--spacing-md);
+  margin: 0 auto var(--spacing-lg);
   position: relative;
-  display: inline-block;
+  display: block;
+  text-align: center;
+  width: 100%;
+  padding: 0 1rem;
 }
 
 .section__title::after {
@@ -1395,6 +1442,8 @@ a:hover {
   border-radius: 4px;
   padding: 0.5rem 0.8rem;
   transition: all 0.3s ease;
+  position: relative;
+  z-index: 1001;
 }
 
 .nav__toggle:hover {
@@ -1734,7 +1783,7 @@ a:hover {
 
 @media (max-width: 768px) {
   .hero {
-    padding: 120px 0 80px;
+    padding: 160px 0 80px;
     text-align: center;
   }
   
@@ -1759,6 +1808,7 @@ a:hover {
   
   .hero__title {
     font-size: 2.5rem;
+    margin-top: 20px;
   }
   
   .hero__image {
@@ -1969,20 +2019,33 @@ a:hover {
   font-weight: 500;
 }
 
-/* Martial Arts Belt Card */
+/* Martial Arts Belt Card - Red Theme */
 .martial-belt-card {
   display: flex;
   align-items: center;
-  gap: var(--spacing-md);
+  gap: var(--spacing-sm);
   padding: var(--spacing-md);
-  background: rgba(255, 215, 0, 0.03);
-  border: 1px solid rgba(255, 215, 0, 0.15);
+  background: rgba(40, 0, 0, 0.2);
+  border: 1px solid rgba(200, 0, 0, 0.2);
   border-radius: var(--radius-md);
   position: relative;
   overflow: hidden;
   box-shadow: 
-    0 8px 25px rgba(255, 215, 0, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    0 4px 20px rgba(150, 0, 0, 0.1),
+    inset 0 1px 1px rgba(255, 255, 255, 0.05);
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  margin-bottom: var(--spacing-sm);
+}
+
+.martial-belt-card:hover {
+  background: rgba(50, 0, 0, 0.25);
+  border-color: rgba(255, 0, 0, 0.3);
+  box-shadow: 
+    0 6px 25px rgba(200, 0, 0, 0.15),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
 }
 
 .martial-belt-card::after {
@@ -1993,8 +2056,8 @@ a:hover {
   right: 0;
   height: 1px;
   background: linear-gradient(90deg, 
-    transparent 0%, 
-    rgba(255, 215, 0, 0.7) 50%, 
+    transparent, 
+    rgba(255, 50, 50, 0.8) 50%, 
     transparent 100%);
   animation: lightPulse 4s ease-in-out infinite;
 }
@@ -2006,16 +2069,26 @@ a:hover {
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg, var(--secondary-color), #ff6b6b);
+  background: linear-gradient(90deg, rgba(255, 0, 0, 0.3), rgba(255, 80, 80, 0.8), rgba(255, 0, 0, 0.3));
 }
 
 .belt-container {
   position: relative;
-  width: 80px;
-  height: 120px;
+  width: 60px;
+  height: 90px;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
+}
+
+.belt-image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  max-height: 40px; /* Adjust this value to control the height of the belt */
+  object-fit: contain;
 }
 
 .belt-red {
@@ -2060,45 +2133,101 @@ a:hover {
 }
 
 .belt-info h4 {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 700;
   color: var(--primary-color);
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.2rem;
+  line-height: 1.2;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-.belt-rank {
+.belt-rank:not(.red-belt) {
   display: block;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   color: var(--secondary-color);
   font-weight: 600;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.1rem;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
+  line-height: 1.2;
+}
+
+.red-belt,
+.belt-rank.red-belt,
+.martial-belt-card .belt-rank.red-belt {
+  color: #ff0000 !important;
+  text-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-block;
+  position: relative;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.red-belt::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 0, 0, 0.1);
+  border-radius: 4px;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 0.5s ease-out;
+}
+
+.red-belt:hover {
+  color: #ff1a1a !important;
+  text-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
+  transform: translateY(-1px);
+}
+
+.red-belt:hover::before {
+  transform: scaleX(1);
 }
 
 .belt-org {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   color: var(--text-light);
   font-style: italic;
+  line-height: 1.2;
+  display: block;
+  opacity: 0.9;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .martial-belt-card {
-    flex-direction: column;
-    text-align: center;
+    flex-direction: row;
+    text-align: left;
     gap: var(--spacing-sm);
+    padding: 0.5rem;
+    width: 100%;
   }
   
   .belt-container {
-    width: 60px;
-    height: 80px;
+    width: 50px;
+    height: 70px;
   }
   
-  .belt-red {
-    width: 45px;
-    height: 70px;
+  .belt-image {
+    max-height: 35px;
+  }
+  
+  .belt-info h4 {
+    font-size: 0.9rem;
+  }
+  
+  .belt-rank {
+    font-size: 0.75rem;
+  }
+  
+  .belt-org {
+    font-size: 0.65rem;
   }
 }
 
@@ -2987,6 +3116,7 @@ a:hover {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--spacing-lg);
+  align-items: stretch;
 }
 
 .tiktok__card {
@@ -2999,6 +3129,9 @@ a:hover {
     0 8px 25px rgba(0, 0, 0, 0.15),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
   position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .tiktok__card::before {
@@ -3106,6 +3239,10 @@ a:hover {
 
 .tiktok__content {
   padding: var(--spacing-md);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .tiktok__content h3 {
@@ -3121,6 +3258,13 @@ a:hover {
   color: var(--text-light);
   font-size: 0.875rem;
   margin-bottom: var(--spacing-md);
+  flex-grow: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 60px; /* Ensures consistent height for 3 lines */
 }
 
 .tiktok__content .btn {
@@ -3128,6 +3272,27 @@ a:hover {
   justify-content: center;
   font-size: 0.875rem;
   padding: var(--spacing-sm) var(--spacing-md);
+  margin-top: auto; /* Pushes the button to the bottom */
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  border: 1px solid var(--secondary-color);
+  transition: all 0.3s ease;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-radius: 4px;
+}
+
+.tiktok__content .btn:hover {
+  background-color: transparent;
+  color: var(--secondary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+}
+
+.tiktok__content .btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(255, 215, 0, 0.2);
 }
 
 /* ===== Back to Top Button ===== */
@@ -3421,6 +3586,18 @@ a:hover {
 @media (max-width: 768px) {
   :root {
     --container-padding: 1rem;
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+  }
+  
+  .section__title {
+    text-align: center;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .section {
@@ -3428,27 +3605,55 @@ a:hover {
   }
   
   .section__title {
-    font-size: 2rem;
+    font-size: 1.8rem;
+    margin-bottom: var(--spacing-md);
   }
   
   .nav__menu {
     position: fixed;
-    top: 70px;
-    left: -100%;
+    top: 60px;
+    left: 0;
     width: 100%;
-    height: calc(100vh - 70px);
-    background-color: var(--neutral-dark);
+    height: auto;
+    max-height: calc(100vh - 60px);
+    background: var(--neutral-dark);
     flex-direction: column;
-    justify-content: start;
-    align-items: center;
-    padding-top: var(--spacing-xl);
-    transition: var(--transition-normal);
-    box-shadow: var(--shadow-lg);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    justify-content: flex-start;
+    align-items: stretch;
+    padding: var(--spacing-md) var(--spacing-sm);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    border-top: 1px solid rgba(255, 215, 0, 0.3);
+    transform: translateY(-10px);
+    opacity: 0;
+    visibility: hidden;
   }
   
   .nav__menu.active {
-    left: 0;
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .nav__menu .nav__link {
+    font-size: 1rem;
+    padding: var(--spacing-md) var(--spacing-lg);
+    margin: var(--spacing-xs) 0;
+    color: var(--text-light);
+    text-align: center;
+    min-width: auto;
+    width: 100%;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+    font-weight: 500;
+  }
+  
+  .nav__menu .nav__link:hover {
+    background: rgba(255, 215, 0, 0.1);
+    color: var(--secondary-color);
+    transform: translateY(-1px);
+    border-color: rgba(255, 215, 0, 0.2);
   }
   
   .nav__toggle {
@@ -3461,21 +3666,50 @@ a:hover {
   
   .hero__grid {
     grid-template-columns: 1fr;
-    text-align: center;
     gap: var(--spacing-lg);
+    text-align: center;
+  }
+  
+  .hero__content {
+    text-align: center;
+    padding: var(--spacing-md);
   }
   
   .hero__title {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
+    margin-bottom: var(--spacing-md);
+    margin-top: var(--spacing-lg);
   }
   
-  .hero__quote {
-    font-size: 1.25rem;
+  .hero__description {
+    font-size: 1rem;
+    margin-bottom: var(--spacing-md);
   }
   
   .hero__actions {
     justify-content: center;
     flex-wrap: wrap;
+    gap: var(--spacing-sm);
+  }
+  
+  .hero__actions .btn {
+    font-size: 0.9rem;
+    padding: var(--spacing-sm) var(--spacing-md);
+    min-width: 140px;
+  }
+  
+  .hero__image {
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  
+  .hero__img-wrapper {
+    transform: none !important;
+  }
+  
+  .hero__decor-1,
+  .hero__decor-2 {
+    display: none;
   }
   
   .footer__grid {
@@ -3501,8 +3735,220 @@ a:hover {
     display: block;
   }
   
-  .experience__grid {
+  .career-main__grid {
     grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+  
+  .career-left__column,
+  .career-right__column {
+    padding: 0;
+  }
+  
+  .section-group {
+    margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+  }
+  
+  .group__title {
+    font-size: 1.3rem;
+    margin-bottom: var(--spacing-md);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+  }
+  
+  .group__title i {
+    font-size: 1.1rem;
+  }
+  
+  .degree-card,
+  .job-card {
+    margin-bottom: var(--spacing-md);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+  }
+  
+  .degree-header,
+  .job-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .degree-icon,
+  .job-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 215, 0, 0.1);
+    border-radius: 50%;
+    font-size: 1rem;
+    color: var(--secondary-color);
+  }
+  
+  .degree-info h4,
+  .job-info h4 {
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  .degree-info p,
+  .job-description p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .institution,
+  .company,
+  .period {
+    font-size: 0.85rem;
+    display: block;
+    margin-top: var(--spacing-xs);
+  }
+  
+  .martial-belt-card {
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    text-align: center;
+  }
+  
+  .belt-container {
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .belt-red {
+    width: 100%;
+    max-width: 200px;
+    height: 30px;
+    margin: 0 auto;
+  }
+  
+  .belt-info h4 {
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .belt-rank,
+  .belt-org {
+    font-size: 0.9rem;
+    display: block;
+    margin: var(--spacing-xs) 0;
+  }
+  
+  .tiktok__grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+  
+  .tiktok__card {
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+  }
+  
+  .tiktok__thumbnail {
+    height: 200px;
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .tiktok__thumbnail img {
+    border-radius: var(--radius-md);
+  }
+  
+  .tiktok__content {
+    text-align: center;
+  }
+  
+  .tiktok__content h3 {
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-sm);
+    line-height: 1.3;
+  }
+  
+  .tiktok__content p {
+    font-size: 0.9rem;
+    margin-bottom: var(--spacing-md);
+    opacity: 0.8;
+  }
+  
+  .tiktok__content .btn {
+    font-size: 0.9rem;
+    padding: var(--spacing-sm) var(--spacing-md);
+    min-width: 140px;
+  }
+  
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+    text-align: center;
+  }
+  
+  .footer__info,
+  .footer__qr,
+  .footer__social {
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .footer__title {
+    font-size: 1.2rem;
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .contact__item {
+    justify-content: center;
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .contact__item i {
+    font-size: 1rem;
+    width: 24px;
+  }
+  
+  .qr__code img {
+    max-width: 150px;
+    height: auto;
+  }
+  
+  .social__links {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+  }
+  
+  .social__link {
+    font-size: 0.85rem;
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+  
+  .footer__bottom {
+    text-align: center;
+    padding-top: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+  }
+  
+  .dev-credit {
+    font-size: 0.8rem;
+    margin-top: var(--spacing-sm);
+  }
+  
+  .fab {
+    display: block;
+    bottom: var(--spacing-lg);
+    right: var(--spacing-lg);
+  }
+  
+  .fab__button {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
   }
 }
 

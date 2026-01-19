@@ -1,120 +1,6 @@
 // ===== Professional JavaScript Enhancements =====
 
-// 1. Typing Effect for Hero Title
-class TypeWriter {
-    constructor(element, text, speed = 100) {
-        this.element = element;
-        this.text = text;
-        this.speed = speed;
-        this.index = 0;
-        this.isDeleting = false;
-        this.pauseDuration = 2000;
-        this.init();
-    }
-
-    init() {
-        this.type();
-    }
-
-    type() {
-        const current = this.isDeleting ? 
-            this.text.substring(0, this.index - 1) : 
-            this.text.substring(0, this.index + 1);
-
-        this.element.textContent = current;
-
-        if (!this.isDeleting && current === this.text) {
-            setTimeout(() => {
-                this.isDeleting = true;
-                this.type();
-            }, this.pauseDuration);
-        } else if (this.isDeleting && current === '') {
-            this.isDeleting = false;
-            this.index = 0;
-            setTimeout(() => this.type(), 500);
-        } else {
-            this.index = this.isDeleting ? this.index - 1 : this.index + 1;
-            setTimeout(() => this.type(), this.speed);
-        }
-    }
-}
-
-// 2. Scroll Progress Indicator
-class ScrollProgress {
-    constructor() {
-        this.progressBar = this.createProgressBar();
-        this.updateProgress();
-        this.init();
-    }
-
-    createProgressBar() {
-        const bar = document.createElement('div');
-        bar.className = 'scroll-progress';
-        bar.innerHTML = '<div class="scroll-progress__bar"></div>';
-        document.body.appendChild(bar);
-        return bar;
-    }
-
-    updateProgress() {
-        const scrollTop = window.pageYOffset;
-        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const scrollPercent = (scrollTop / docHeight) * 100;
-        this.progressBar.querySelector('.scroll-progress__bar').style.width = scrollPercent + '%';
-    }
-
-    init() {
-        window.addEventListener('scroll', () => this.updateProgress());
-    }
-}
-
-// 3. Advanced Smooth Scroll with Easing
-class SmoothScroll {
-    constructor() {
-        this.init();
-    }
-
-    easeInOutCubic(t) {
-        return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-    }
-
-    scrollTo(target, duration = 800) {
-        const startPosition = window.pageYOffset;
-        const targetPosition = target - document.querySelector('#header').offsetHeight - 20;
-        const distance = targetPosition - startPosition;
-        let startTime = null;
-
-        const animation = currentTime => {
-            if (startTime === null) startTime = currentTime;
-            const timeElapsed = currentTime - startTime;
-            const progress = Math.min(timeElapsed / duration, 1);
-            const ease = this.easeInOutCubic(progress);
-            
-            window.scrollTo(0, startPosition + distance * ease);
-            
-            if (timeElapsed < duration) {
-                requestAnimationFrame(animation);
-            }
-        };
-
-        requestAnimationFrame(animation);
-    }
-
-    init() {
-        // Apply to all navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const targetId = link.getAttribute('href');
-                const target = document.querySelector(targetId);
-                if (target) {
-                    this.scrollTo(target.offsetTop);
-                }
-            });
-        });
-    }
-}
-
-// 4. Intersection Observer for Performance
+// 1. Advanced Smooth Scroll with Easing
 class PerformanceObserver {
     constructor() {
         this.options = {
@@ -346,18 +232,6 @@ class ErrorHandler {
 
 // ===== Initialize All Professional Features =====
 const initProfessionalFeatures = () => {
-    // Initialize typing effect for hero title
-    const heroTitle = document.querySelector('.hero__title--highlight');
-    if (heroTitle) {
-        new TypeWriter(heroTitle, heroTitle.textContent, 100);
-    }
-    
-    // Initialize scroll progress
-    new ScrollProgress();
-    
-    // Initialize smooth scroll
-    new SmoothScroll();
-    
     // Initialize performance observer
     new PerformanceObserver();
     
@@ -390,32 +264,78 @@ let ticking = false;
 let lastScrollY = window.scrollY;
 const headerHeight = header ? header.offsetHeight : 0;
 
-// ===== Mobile Menu Toggle =====
-if (navToggle) {
-    navToggle.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-        
-        // Toggle icon
-        const icon = navToggle.querySelector('i');
-        if (icon) {
-            icon.classList.toggle('fa-bars');
-            icon.classList.toggle('fa-times');
+// ===== Utility Functions =====
+const throttle = (func, limit) => {
+    let inThrottle;
+    return function() {
+        const args = arguments;
+        const context = this;
+        if (!inThrottle) {
+            func.apply(context, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
         }
-    });
+    };
+};
+
+const debounce = (func, wait) => {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+};
+
+// ===== Mobile Menu Toggle =====
+const initMobileMenu = () => {
+    if (navToggle && navMenu) {
+        navToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            navMenu.classList.toggle('active');
+            
+            // Toggle icon
+            const icon = navToggle.querySelector('i');
+            if (icon) {
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
+            }
+        });
+    }
+};
+
+// Initialize mobile menu immediately if DOM is ready, otherwise wait for DOMContentLoaded
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMobileMenu);
+} else {
+    initMobileMenu();
 }
 
 // ===== Close Mobile Menu on Link Click =====
-if (navLinks.length > 0) {
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            if (navMenu) navMenu.classList.remove('active');
-            const icon = navToggle ? navToggle.querySelector('i') : null;
-            if (icon) {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
+const initMobileMenuClose = () => {
+    if (navLinks.length > 0) {
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (navMenu) navMenu.classList.remove('active');
+                const icon = navToggle ? navToggle.querySelector('i') : null;
+                if (icon) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
         });
-    });
+    }
+};
+
+// Initialize mobile menu close functionality
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMobileMenuClose);
+} else {
+    initMobileMenuClose();
 }
 
 // ===== Optimized Header Scroll Effect =====
@@ -472,12 +392,9 @@ if (backToTopButton) {
     });
 }
 
-// ===== Scroll Reveal Animation with Highlights =====
+// ===== Scroll Reveal Animation =====
 const revealOnScroll = () => {
     const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
-    const sections = document.querySelectorAll('section');
-    const sectionGroups = document.querySelectorAll('.section-group');
-    const cards = document.querySelectorAll('.degree-card, .job-card, .martial-belt-card');
     
     revealElements.forEach(element => {
         const elementTop = element.getBoundingClientRect().top;
@@ -485,49 +402,6 @@ const revealOnScroll = () => {
         
         if (elementTop < windowHeight - 100) {
             element.classList.add('active');
-        }
-    });
-    
-    // Apply highlight effects to sections
-    sections.forEach(section => {
-        const sectionTop = section.getBoundingClientRect().top;
-        const windowHeight = window.innerHeight;
-        
-        if (sectionTop < windowHeight - 50 && sectionTop > -windowHeight/2) {
-            // Add section highlight classes
-            section.classList.add('section-highlight', 'active');
-            
-            // Special effects for specific sections
-            if (section.classList.contains('education-career')) {
-                section.classList.add('section-glow');
-            }
-            
-            // Apply effects to section groups within this section
-            const groupsInSection = section.querySelectorAll('.section-group');
-            groupsInSection.forEach((group, index) => {
-                setTimeout(() => {
-                    group.classList.add('active');
-                }, index * 200);
-            });
-            
-            // Apply effects to cards within this section
-            const cardsInSection = section.querySelectorAll('.degree-card, .job-card');
-            cardsInSection.forEach((card, index) => {
-                setTimeout(() => {
-                    card.classList.add('card-highlight', 'active');
-                }, index * 100);
-            });
-            
-            // Special effect for martial arts belt
-            const beltCard = section.querySelector('.martial-belt-card');
-            if (beltCard) {
-                setTimeout(() => {
-                    beltCard.classList.add('section-pulse', 'active');
-                }, 400);
-            }
-        } else {
-            // Remove classes when section is out of view
-            section.classList.remove('section-highlight', 'active', 'section-glow');
         }
     });
 };
@@ -574,7 +448,7 @@ const initRevealAnimations = () => {
 const smoothScroll = () => {
     if (!navLinks.length) return;
     
-    const scrollToElement = (element, duration = 800) => {
+    const scrollToElement = (element, duration = 300) => {
         if (!element) return;
         
         const start = window.pageYOffset;
@@ -627,86 +501,6 @@ const smoothScroll = () => {
     });
 };
 
-// ===== Navbar Highlight Effect =====
-let activeNavItem = null;
-const navMenu = document.querySelector('.nav__menu');
-const navHighlight = document.createElement('div');
-
-// Create and style the highlight element
-navHighlight.classList.add('nav__highlight');
-if (navMenu) {
-    navMenu.appendChild(navHighlight);
-}
-
-const updateNavHighlight = (element) => {
-    if (!element) return;
-    
-    const navRect = navMenu.getBoundingClientRect();
-    const elementRect = element.getBoundingClientRect();
-    
-    navHighlight.style.width = `${elementRect.width}px`;
-    navHighlight.style.left = `${elementRect.left - navRect.left}px`;
-    navHighlight.style.opacity = '1';
-};
-
-const updateActiveNavItem = () => {
-    const scrollPosition = window.scrollY + 100;
-    const sections = document.querySelectorAll('section[id]');
-    let currentSection = '';
-
-    // Find current section
-    for (const section of sections) {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.offsetHeight;
-        
-        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-            currentSection = section.id;
-            break;
-        }
-    }
-
-    // Update active nav item
-    if (currentSection) {
-        const newActiveItem = document.querySelector(`.nav__link[href="#${currentSection}"]`);
-        if (newActiveItem && newActiveItem !== activeNavItem) {
-            if (activeNavItem) {
-                activeNavItem.classList.remove('active');
-            }
-            newActiveItem.classList.add('active');
-            activeNavItem = newActiveItem;
-            updateNavHighlight(newActiveItem);
-        }
-    }
-};
-
-// Initial setup
-const initNavHighlight = () => {
-    // Set initial active item
-    const firstNavItem = document.querySelector('.nav__link');
-    if (firstNavItem) {
-        firstNavItem.classList.add('active');
-        activeNavItem = firstNavItem;
-        updateNavHighlight(firstNavItem);
-    }
-    
-    // Update on scroll
-    window.addEventListener('scroll', () => {
-        requestAnimationFrame(updateActiveNavItem);
-    }, { passive: true });
-    
-    // Update on window resize
-    window.addEventListener('resize', () => {
-        if (activeNavItem) {
-            updateNavHighlight(activeNavItem);
-        }
-    });
-};
-
-// Start the highlight effect
-if (navMenu) {
-    initNavHighlight();
-}
-
 // ===== Lazy Loading for Images =====
 const lazyLoadImages = () => {
     const images = document.querySelectorAll('img[data-src]');
@@ -733,16 +527,7 @@ const measurePerformance = () => {
     // Check page load time
     window.addEventListener('load', () => {
         const loadTime = performance.now();
-        console.log(`Page loaded in ${loadTime.toFixed(2)}ms`);
-        
-        // Log performance metrics
-        if ('performance' in window) {
-            const navigation = performance.getEntriesByType('navigation')[0];
-            console.log('DNS lookup time:', navigation.domainLookupEnd - navigation.domainLookupStart, 'ms');
-            console.log('TCP connection time:', navigation.connectEnd - navigation.connectStart, 'ms');
-            console.log('Server response time:', navigation.responseEnd - navigation.requestStart, 'ms');
-            console.log('DOM processing time:', navigation.domContentLoadedEventEnd - navigation.domContentLoadedEventStart, 'ms');
-        }
+        // Silently track performance without console logs
     });
 };
 
@@ -772,8 +557,7 @@ const enhanceAccessibility = () => {
 // ===== Error Handling =====
 const handleError = () => {
     window.addEventListener('error', (e) => {
-        console.error('JavaScript error:', e.error);
-        // You could send this to an error tracking service
+        // Silently handle errors
     });
     
     // Handle image loading errors
@@ -781,15 +565,13 @@ const handleError = () => {
     images.forEach(img => {
         img.addEventListener('error', () => {
             img.style.display = 'none';
-            console.warn(`Failed to load image: ${img.src}`);
         });
     });
     
     // Handle TikTok script loading errors specifically
     window.addEventListener('error', (e) => {
         if (e.filename && e.filename.includes('tiktok.com/embed.js')) {
-            console.warn('TikTok embed script blocked - this is expected with ad blockers');
-            // Don't crash the page, just log the warning
+            // Silently handle TikTok script blocking
             e.preventDefault();
         }
     }, true);
@@ -819,44 +601,14 @@ const initializeApp = () => {
         // Event listeners
         window.addEventListener('scroll', () => {
             revealOnScroll();
-            highlightActiveSection();
         });
         
         // Initial checks
         revealOnScroll();
-        highlightActiveSection();
-        
-        console.log('Website initialized successfully');
         
     } catch (error) {
         console.error('Error initializing website:', error);
     }
-};
-
-// ===== Utility Functions =====
-const debounce = (func, wait) => {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-};
-
-const throttle = (func, limit) => {
-    let inThrottle;
-    return function() {
-        const args = arguments;
-        const context = this;
-        if (!inThrottle) {
-            func.apply(context, args);
-            inThrottle = true;
-            setTimeout(() => inThrottle = false, limit);
-        }
-    };
 };
 
 // ===== Service Worker Registration (for PWA) =====
@@ -865,10 +617,10 @@ const registerServiceWorker = () => {
         window.addEventListener('load', () => {
             navigator.serviceWorker.register('/sw.js')
                 .then(registration => {
-                    console.log('SW registered: ', registration);
+                    // Silently register service worker
                 })
                 .catch(registrationError => {
-                    console.log('SW registration failed: ', registrationError);
+                    // Silently handle registration error
                 });
         });
     }
