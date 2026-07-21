@@ -601,23 +601,7 @@ img {
 }
 
 /* Animations */
-.animate-on-load {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeUpIn 600ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes fadeUpIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.delay-100 { animation-delay: 100ms; }
-.delay-200 { animation-delay: 200ms; }
-.delay-300 { animation-delay: 300ms; }
-.delay-400 { animation-delay: 400ms; }
+/* Removed load animations to keep loading instant and avoid AI-slop tells */
 
 /* Responsive Breakpoints */
 @media (max-width: 1023px) {
