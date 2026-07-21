@@ -3,198 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Mai Quốc Triệu - ThS. Giảng viên Đại học FPT Cần Thơ, Võ sư Vovinam Hồng đai nhất. Văn Võ Song Toàn">
-    <meta name="keywords" content="Mai Quốc Triệu, Vovinam Cần Thơ, Đại học FPT, Giảng viên, Võ sư">
-    <meta name="author" content="Mai Quốc Triệu">
-    <title>Mai Quốc Triệu</title>
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    
-    <!-- CSS -->
+    <title>Mai Quốc Triệu - Portfolio</title>
+    <meta name="description" content="Mai Quốc Triệu - Giảng viên Đại học FPT Cần Thơ, Võ sư Vovinam Hồng đai nhất.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
-    
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <!-- Header Navigation -->
-    <header class="header" id="header">
-        <nav class="nav container">
-            <div class="nav__logo">
-                <h1>MQT</h1>
-            </div>
-            <ul class="nav__menu" id="nav-menu">
-                <li class="nav__item"><a href="#gioi-thieu" class="nav__link">Giới thiệu</a></li>
-                <li class="nav__item"><a href="#hoc-van" class="nav__link">Học vấn & Sự nghiệp</a></li>
-                <li class="nav__item"><a href="#tiktok" class="nav__link">TikTok</a></li>
-                <li class="nav__item"><a href="#lien-he" class="nav__link">Liên hệ</a></li>
-            </ul>
-            
-            <div class="nav__toggle" id="nav-toggle">
+    
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="#home" class="nav-logo">MQT</a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
                 <i class="fas fa-bars"></i>
-            </div>
-        </nav>
-    </header>
+            </button>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#home" class="nav-link">Giới thiệu</a></li>
+                <li><a href="#career" class="nav-link">Học vấn & Sự nghiệp</a></li>
+                <li><a href="#tiktok" class="nav-link">TikTok</a></li>
+                <li><a href="#contact" class="nav-link">Liên hệ</a></li>
+            </ul>
+        </div>
+    </nav>
 
     <main>
-        <!-- Hero Section -->
-        <section class="hero section" id="gioi-thieu">
-            <!-- Background elements -->
-            <div class="hero__background"></div>
-            <div class="hero__decor hero__decor-1"></div>
-            <div class="hero__decor hero__decor-2"></div>
-            
-            <div class="hero__container">
-                <div class="hero__grid">
-                    <div class="hero__content">
-                        <h1 class="hero__title">
-                            <span class="hero__title--highlight">Mai Quốc Triệu</span>
-                        </h1>
-                        <div class="hero__description">
-                            <p>Giảng viên Đại học FPT Cần Thơ</p>
-                            <p>Võ sư Vovinam Hồng đai nhất</p>
-                        </div>
-                        <div class="slogan">
-                            <span class="slogan__text">Tự tin là chìa khoá giúp chúng ta toả sáng</span>
-                            <div class="slogan__underline"></div>
-                        </div>
-                        
-                        <div class="hero__actions">
-                            <a href="#lien-he" class="btn btn--primary light-corner">
-                                <i class="fas fa-envelope"></i> Liên hệ ngay
-                            </a>
-                            <a href="#hoc-van" class="btn btn--outline light-corner">
-                                <i class="fas fa-scroll"></i> Xem học vấn & sự nghiệp
-                            </a>
-                        </div>
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content animate-on-load">
+                    <img src="assets/myself.jpg" alt="Mai Quốc Triệu" class="hero-portrait">
+                    <h1 class="hero-name font-heading">MAI QUỐC TRIỆU</h1>
+                    <div class="hero-roles animate-on-load delay-100">
+                        <span>Giảng viên Đại học FPT Cần Thơ</span>
+                        <span>Võ sư Vovinam Hồng đai nhất</span>
                     </div>
-                    <div class="hero__image">
-                        <div class="hero__img-wrapper">
-                            <img src="assets/myself.jpg" alt="Mai Quốc Triệu" class="hero__img">
-                        </div>
+                    <blockquote class="hero-slogan animate-on-load delay-200">
+                        "Tự tin là chìa khoá giúp chúng ta toả sáng"
+                    </blockquote>
+                    <div class="hero-actions animate-on-load delay-300">
+                        <a href="#contact" class="btn btn-primary">
+                            <i class="fas fa-envelope"></i> Liên hệ ngay
+                        </a>
+                        <a href="#career" class="btn btn-outline">
+                            <i class="fas fa-scroll"></i> Xem học vấn
+                        </a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Education & Career Section -->
-        <section class="education-career section" id="hoc-van">
+        <section id="career" class="section">
             <div class="container">
-                <h2 class="section__title">Học vấn và Sự nghiệp</h2>
+                <div class="text-center animate-on-load">
+                    <h2 class="section-title font-heading">HỌC VẤN VÀ SỰ NGHIỆP</h2>
+                </div>
                 
-                <!-- Main 2-Column Layout -->
-                <div class="career-main__grid">
-                    <!-- Left Column: Martial Arts and Education -->
-                    <div class="career-left__column">
-                        <div class="section-group">
-                            <h3 class="group__title">
-                                <i class="fas fa-fist-raised"></i>
-                                Chuyên môn Võ thuật
+                <div class="career-grid">
+                    <div class="career-col animate-on-load delay-100">
+                        <div>
+                            <h3 class="career-group-title font-heading">
+                                <i class="fas fa-fist-raised"></i> CHUYÊN MÔN VÕ THUẬT
                             </h3>
-                            <div class="martial-belt-card light-pulse">
-                                <div class="belt-container">
-                                    <img src="assets/belt.png" alt="Võ sư đai đỏ" class="belt-image">
-                                </div>
-                                <div class="belt-info">
-                                    <h4>Võ sư Vovinam</h4>
-                                    <span class="belt-rank red-belt">Hồng đai đệ nhất cấp</span>
+                            <div class="career-card belt-card">
+                                <img src="assets/belt.png" alt="Hồng đai nhất" class="belt-img" loading="lazy">
+                                <div>
+                                    <h4 class="belt-title">Võ sư Vovinam</h4>
+                                    <span class="belt-rank">Hồng đai đệ nhất cấp</span>
                                     <span class="belt-org">Liên đoàn Vovinam Việt Nam</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="section-group light-line-border">
-                            <h3 class="group__title">
-                                <i class="fas fa-graduation-cap"></i>
-                                Học vấn
+                        <div>
+                            <h3 class="career-group-title font-heading">
+                                <i class="fas fa-graduation-cap"></i> HỌC VẤN
                             </h3>
-                            <div class="education__cards">
-                                <div class="degree-card light-line-sides">
-                                    <div class="degree-header">
-                                        <div class="degree-icon">
-                                            <i class="fas fa-user-graduate"></i>
-                                        </div>
-                                        <div class="degree-info">
-                                            <h4>Thạc sĩ</h4>
-                                            <p>Giáo dục học</p>
-                                            <span class="institution">Đại học TDTT TP.HCM</span>
-                                        </div>
-                                    </div>
+                            <div class="career-cards">
+                                <div class="career-card">
+                                    <h4 class="degree-title">Thạc sĩ Giáo dục học</h4>
+                                    <span class="degree-meta">Đại học TDTT TP.HCM</span>
                                 </div>
-                                
-                                <div class="degree-card light-line-sides">
-                                    <div class="degree-header">
-                                        <div class="degree-icon">
-                                            <i class="fas fa-award"></i>
-                                        </div>
-                                        <div class="degree-info">
-                                            <h4>Cử nhân</h4>
-                                            <p>Giáo dục thể chất</p>
-                                            <span class="institution">Đại học TDTT TP.HCM</span>
-                                        </div>
-                                    </div>
+                                <div class="career-card">
+                                    <h4 class="degree-title">Cử nhân Giáo dục thể chất</h4>
+                                    <span class="degree-meta">Đại học TDTT TP.HCM</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Right Column: Professional Career -->
-                    <div class="career-right__column">
-                        <div class="section-group light-line-border">
-                            <h3 class="group__title">
-                                <i class="fas fa-briefcase"></i>
-                                Công việc
+                    <div class="career-col animate-on-load delay-200">
+                        <div>
+                            <h3 class="career-group-title font-heading">
+                                <i class="fas fa-briefcase"></i> CÔNG VIỆC
                             </h3>
-                            <div class="career__cards">
-                                <div class="job-card light-line">
+                            <div class="career-cards">
+                                <div class="career-card">
                                     <div class="job-header">
-                                        <div class="job-icon">
-                                            <i class="fas fa-chalkboard-teacher"></i>
+                                        <div>
+                                            <h4 class="job-title">Giảng viên GDTC</h4>
+                                            <span class="job-company">Đại học FPT phân hiệu Cần Thơ</span>
                                         </div>
-                                        <div class="job-info">
-                                            <h4>Giảng viên GDTC</h4>
-                                            <span class="company">Đại học FPT phân hiệu Cần Thơ</span>
-                                            <span class="period">Từ 2020 - Hiện tại</span>
-                                        </div>
+                                        <span class="job-period">2020 - Nay</span>
                                     </div>
-                                    <div class="job-description">
-                                        <p>Phụ trách môn GDTC (Vovinam) và hỗ trợ tổ chức các sự kiện thể thao</p>
-                                    </div>
+                                    <p class="job-desc">Phụ trách môn GDTC (Vovinam) và hỗ trợ tổ chức các sự kiện thể thao.</p>
                                 </div>
                                 
-                                <div class="job-card light-line">
+                                <div class="career-card">
                                     <div class="job-header">
-                                        <div class="job-icon">
-                                            <i class="fas fa-users-cog"></i>
+                                        <div>
+                                            <h4 class="job-title">Trưởng bộ môn Vovinam</h4>
+                                            <span class="job-company">Phường Ô Môn (TP. Cần Thơ)</span>
                                         </div>
-                                        <div class="job-info">
-                                            <h4>Trưởng bộ môn Vovinam</h4>
-                                            <span class="company">Phường Ô Môn (TP. Cần Thơ)</span>
-                                            <span class="period">Đang công tác</span>
-                                        </div>
+                                        <span class="job-period">Đang công tác</span>
                                     </div>
-                                    <div class="job-description">
-                                        <p>Đào tạo và phát triển thế hệ võ sĩ trẻ tại địa phương</p>
-                                    </div>
+                                    <p class="job-desc">Đào tạo và phát triển thế hệ võ sĩ trẻ tại địa phương.</p>
                                 </div>
                                 
-                                <div class="job-card light-line">
+                                <div class="career-card">
                                     <div class="job-header">
-                                        <div class="job-icon">
-                                            <i class="fas fa-handshake"></i>
+                                        <div>
+                                            <h4 class="job-title">Ủy viên Liên đoàn Vovinam</h4>
+                                            <span class="job-company">TP. Cần Thơ</span>
                                         </div>
-                                        <div class="job-info">
-                                            <h4>Ủy viên Liên đoàn Vovinam</h4>
-                                            <span class="company">TP. Cần Thơ</span>
-                                            <span class="period">Đang công tác</span>
-                                        </div>
+                                        <span class="job-period">Đang công tác</span>
                                     </div>
-                                    <div class="job-description">
-                                        <p>Phát triển và quảng bá Vovinam tại địa phương</p>
-                                    </div>
+                                    <p class="job-desc">Phát triển và quảng bá Vovinam tại địa phương.</p>
                                 </div>
                             </div>
                         </div>
@@ -203,39 +134,43 @@
             </div>
         </section>
 
-        <!-- TikTok Section -->
-        <section class="tiktok section" id="tiktok">
+        <section id="tiktok" class="section">
             <div class="container">
-                <h2 class="section__title">Kênh truyền thông & Chia sẻ kỹ năng</h2>
-                <div class="tiktok__grid">
-                    <div class="tiktok__card light-scan">
-                        <a href="https://www.tiktok.com/@maiquoctrieu/video/7591358896489467156" target="_blank" class="tiktok__thumbnail">
-                            <img src="assets/thumb1.jpg" alt="TikTok Video 1">
+                <div class="text-center">
+                    <h2 class="section-title font-heading">KÊNH TRUYỀN THÔNG</h2>
+                </div>
+                
+                <div class="tiktok-grid">
+                    <div class="tiktok-card">
+                        <a href="https://www.tiktok.com/@maiquoctrieu/video/7591358896489467156" target="_blank" class="tiktok-thumb-wrap">
+                            <img src="assets/thumb1.jpg" alt="Buổi sáng đầy năng lượng" class="tiktok-thumb" loading="lazy">
                         </a>
-                        <div class="tiktok__content">
-                            <h3>Buổi sáng đầy năng lượng 🤜🥋</h3>
-                            <p>#dongdienvovinam #Anqp #daihocfptcantho</p>
-                            <a href="https://www.tiktok.com/@maiquoctrieu/video/7591358896489467156" target="_blank" class="btn btn--primary">Xem trên TikTok</a>
+                        <div class="tiktok-content">
+                            <h3 class="tiktok-title">Buổi sáng đầy năng lượng 🤜🥋</h3>
+                            <p class="tiktok-tags">#dongdienvovinam #Anqp #daihocfptcantho</p>
+                            <a href="https://www.tiktok.com/@maiquoctrieu/video/7591358896489467156" target="_blank" class="btn btn-outline btn-sm">Xem trên TikTok</a>
                         </div>
                     </div>
-                    <div class="tiktok__card light-scan">
-                        <a href="https://www.tiktok.com/@maiquoctrieu/video/7295025356807884034" target="_blank" class="tiktok__thumbnail">
-                            <img src="assets/thumb2.jfif" alt="TikTok Video 2">
+                    
+                    <div class="tiktok-card">
+                        <a href="https://www.tiktok.com/@maiquoctrieu/video/7295025356807884034" target="_blank" class="tiktok-thumb-wrap">
+                            <img src="assets/thumb2.jfif" alt="Clip quảng cáo sinh viên" class="tiktok-thumb" loading="lazy">
                         </a>
-                        <div class="tiktok__content">
-                            <h3>Clip quảng cáo sinh viên ngành Truyền thông</h3>
-                            <p>#fptucantho #boxing #box</p>
-                            <a href="https://www.tiktok.com/@maiquoctrieu/video/7295025356807884034" target="_blank" class="btn btn--primary">Xem trên TikTok</a>
+                        <div class="tiktok-content">
+                            <h3 class="tiktok-title">Clip quảng cáo sinh viên ngành Truyền thông</h3>
+                            <p class="tiktok-tags">#fptucantho #boxing #box</p>
+                            <a href="https://www.tiktok.com/@maiquoctrieu/video/7295025356807884034" target="_blank" class="btn btn-outline btn-sm">Xem trên TikTok</a>
                         </div>
                     </div>
-                    <div class="tiktok__card light-scan">
-                        <a href="https://www.tiktok.com/@maiquoctrieu/video/7367362345804303633" target="_blank" class="tiktok__thumbnail">
-                            <img src="assets/thumb3.jfif" alt="TikTok Video 3">
+                    
+                    <div class="tiktok-card">
+                        <a href="https://www.tiktok.com/@maiquoctrieu/video/7367362345804303633" target="_blank" class="tiktok-thumb-wrap">
+                            <img src="assets/thumb3.jfif" alt="Thi Thăng cấp Cao đẳng" class="tiktok-thumb" loading="lazy">
                         </a>
-                        <div class="tiktok__content">
-                            <h3>Thi Thăng cấp Cao đẳng Vovinam 2024</h3>
-                            <p>#vovinam</p>
-                            <a href="https://www.tiktok.com/@maiquoctrieu/video/7367362345804303633" target="_blank" class="btn btn--primary">Xem trên TikTok</a>
+                        <div class="tiktok-content">
+                            <h3 class="tiktok-title">Thi Thăng cấp Cao đẳng Vovinam 2024</h3>
+                            <p class="tiktok-tags">#vovinam</p>
+                            <a href="https://www.tiktok.com/@maiquoctrieu/video/7367362345804303633" target="_blank" class="btn btn-outline btn-sm">Xem trên TikTok</a>
                         </div>
                     </div>
                 </div>
@@ -243,61 +178,57 @@
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="footer" id="lien-he">
+    <footer id="contact" class="footer">
         <div class="container">
-            <div class="footer__grid">
-                <div class="footer__info">
-                    <h3>Liên hệ</h3>
-                    <div class="contact__items">
-                        <div class="contact__item">
+            <div class="footer-grid">
+                <div>
+                    <h3 class="footer-heading font-heading">LIÊN HỆ</h3>
+                    <div class="contact-items">
+                        <div class="contact-item">
                             <i class="fas fa-phone"></i>
                             <span>0943.565.526</span>
                         </div>
-                        <div class="contact__item">
+                        <div class="contact-item">
                             <i class="fas fa-map-marker-alt"></i>
                             <span>Phường Ô Môn, TP. Cần Thơ</span>
                         </div>
-                        <div class="contact__item">
+                        <div class="contact-item">
                             <i class="fas fa-envelope"></i>
-                            <span>Trieuvovinam@gmail.com</span>
+                            <a href="mailto:Trieuvovinam@gmail.com">Trieuvovinam@gmail.com</a>
                         </div>
                     </div>
                 </div>
-                <div class="footer__qr">
-                    <h3>Quét Zalo</h3>
-                    <div class="qr__code">
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://zalo.me/0943565526" alt="Zalo QR Code">
+                
+                <div>
+                    <h3 class="footer-heading font-heading">QUÉT ZALO</h3>
+                    <div class="qr-wrapper">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://zalo.me/0943565526" alt="Zalo QR Code" class="qr-code">
                     </div>
                 </div>
-                <div class="footer__social">
-                    <h3>Mạng xã hội</h3>
-                    <div class="social__links">
-                        <a href="https://www.tiktok.com/@maiquoctrieu" class="social__link" target="_blank">
-                            <span class="social-text">TikTok</span>
+                
+                <div>
+                    <h3 class="footer-heading font-heading">MẠNG XÃ HỘI</h3>
+                    <div class="social-links">
+                        <a href="https://www.tiktok.com/@maiquoctrieu" target="_blank" class="social-btn">
+                            <i class="fab fa-tiktok"></i> TikTok
                         </a>
-                        <a href="https://www.facebook.com/trieu.mai.7505" class="social__link" target="_blank">
-                            <span class="social-text">Facebook</span>
+                        <a href="https://www.facebook.com/trieu.mai.7505" target="_blank" class="social-btn">
+                            <i class="fab fa-facebook-f"></i> Facebook
                         </a>
-                        <a href="https://zalo.me/0943565526" class="social__link" target="_blank">
-                            <span class="social-text">Zalo</span>
+                        <a href="https://zalo.me/0943565526" target="_blank" class="social-btn">
+                            <i class="fas fa-comment-dots"></i> Zalo
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="footer__bottom">
-                <p>&copy; 2026 Mai Quốc Triệu. All rights reserved.</p>
-                <p class="dev-credit">Dev by <a href="https://quinc-fptu.github.io/myin4graphic/" target="_blank" class="dev-link">QuiNC</a></p>
+            
+            <div class="footer-bottom">
+                <span class="footer-text">© 2026 Mai Quốc Triệu. All rights reserved.</span>
+                <span class="footer-text">Dev by <a href="#" style="text-decoration: underline;">QuiNC</a></span>
             </div>
         </div>
     </footer>
 
-    <!-- Back to Top Button -->
-    <button class="back-to-top" id="back-to-top" aria-label="Back to top">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
-    <!-- JavaScript -->
     <script src="script.js"></script>
 </body>
 </html>
